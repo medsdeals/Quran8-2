@@ -13,6 +13,7 @@ export interface APIWord {
     page_number: number;
     line_number: number;
     text: string;
+    text_uthmani?: string;
     translation?: {
         text: string;
         language_name: string;
@@ -85,7 +86,7 @@ export interface ProcessedPage {
  * Fetches verses for a specific page with word-level data
  */
 export async function fetchPageWithWords(pageNumber: number): Promise<APIPageResponse> {
-    const url = `${API_BASE_URL}/verses/by_page/${pageNumber}?words=true&per_page=all&word_fields=code_v1,code_v2,line_number,page_number,text`;
+    const url = `${API_BASE_URL}/verses/by_page/${pageNumber}?words=true&per_page=all&word_fields=code_v1,code_v2,line_number,page_number,text,text_uthmani`;
 
     const response = await fetch(url);
     if (!response.ok) {

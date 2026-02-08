@@ -107,8 +107,7 @@ function generateHTML(
   pageNumber: number,
   fontVersion: 'v1' | 'v2'
 ): string {
-  // Generate CSS for the QCF font (page-specific)
-  // Use GitHub-hosted fonts with correct naming: QCF_P001, QCF_P002, etc.
+  // Use QCF (Quran Complex Font) - page-specific fonts with proper glyph codes
   const paddedPage = pageNumber.toString().padStart(3, '0');
   const fontFamily = `QCF_P${paddedPage}`;
 
@@ -117,15 +116,14 @@ function generateHTML(
     ? `https://raw.githubusercontent.com/mustafa0x/qpc-fonts/master/mushaf-v2-woff2/QCF_P${paddedPage}.woff2`
     : `https://raw.githubusercontent.com/mustafa0x/qpc-fonts/master/mushaf-woff2/QCF_P${paddedPage}.woff2`;
 
-
-  // Generate lines HTML
+  // Generate lines HTML using QCF glyph codes
   const linesHTML = processedPage.lines.map((line) => {
     if (line.words.length === 0) {
       // Empty line placeholder
       return `<div class="line line--empty" data-line="${line.lineNumber}"></div>`;
     }
 
-    // Get the glyph code based on font version
+    // Use QCF glyph codes for proper calligraphic rendering
     const wordsHTML = line.words.map((word, idx) => {
       const glyphCode = fontVersion === 'v1' ? word.code_v1 : (word.code_v2 || word.code_v1);
       const isEnd = word.char_type_name === 'end';
@@ -154,7 +152,6 @@ function generateHTML(
   }).join('');
 
   // Calculate font size based on page (pages 1-2 have larger text)
-  // Reduced font size to ensure text fits on screen
   const baseFontSize = pageNumber <= 2 ? 26 : 22;
 
   return `
@@ -182,7 +179,7 @@ function generateHTML(
     }
     
     body {
-      font-family: '${fontFamily}', 'KFGQPC Uthmanic Script HAFS', 'Traditional Arabic', serif;
+      font-family: '${fontFamily}', 'Traditional Arabic', serif;
       background: #fefcf3;
       direction: rtl;
       -webkit-user-select: none;
@@ -201,7 +198,7 @@ function generateHTML(
     }
     
     /* ============================================
-       LINES - Exactly 15 per page (8 for pages 1-2)
+       LINES - 15 per page (8 for pages 1-2)
        ============================================ */
     .line {
       width: 100%;
@@ -224,7 +221,7 @@ function generateHTML(
     }
     
     /* ============================================
-       WORDS - Using QCF glyph fonts
+       WORDS - QCF glyph fonts
        ============================================ */
     .word {
       font-size: ${baseFontSize}px;
