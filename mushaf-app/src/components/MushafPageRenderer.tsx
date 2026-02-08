@@ -204,12 +204,12 @@ function generateHTML(
       width: 100%;
       min-height: ${baseFontSize + 10}px;
       display: flex;
-      justify-content: center;
+      justify-content: ${pageNumber <= 2 ? 'center' : 'space-between'};
       align-items: center;
       flex-wrap: nowrap;
       direction: rtl;
       padding: 1px 0;
-      gap: 3px;
+      ${pageNumber <= 2 ? 'gap: 4px;' : ''}
     }
     
     .line:last-child {
