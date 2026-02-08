@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Mushaf - Coran 15 Lignes",
+    "slug": "mushaf-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#2563eb"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mushaf.quran",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "fetch",
+          "processing"
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#2563eb"
+      },
+      "package": "com.mushaf.quran",
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-font",
+      "expo-asset"
+    ]
+  }
+}
